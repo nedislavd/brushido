@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   canvas: any;
 
   configProps: any = {
-    width: 1024,
+    width: 800,
     height: 1024,
     canvasFill: '#FFFFFF',
     canvasImage: '',
@@ -50,9 +50,12 @@ export class AppComponent implements OnInit {
     });
 
     this.canvas.on({
+      'selection:cleared': (e) => {
+        this.selected = null;
+      },
       'selection:created': (e) => {
 
-        const selectedObject = e.target;
+        let selectedObject = e.target;
         this.selected = selectedObject;
         console.log(e.target);
         selectedObject.hasRotatingPoint = true;
@@ -198,8 +201,14 @@ export class AppComponent implements OnInit {
   setCanvasBgrImage() {
     let self = this;
     if (this.configProps.canvasImage) {
-      this.canvas.setBackgroundColor({ source: this.configProps.canvasImage, repeat: 'repeat' }, function () {
-        // self.configProps.canvasFill = '';
+      this.canvas.setBackgroundColor({ source: this.configProps.canvasImage, repeat: 'repeat' }, () => {
+        self.configProps.canvasFill = '';
+        self.canvas.renderAll();
+      });
+    } else {
+      self.canvas.setBackgroundColor('#FFFFFF', () => {
+        self.configProps.canvasFill = '#FFFFFF';
+        self.configProps.canvasImage = '';
         self.canvas.renderAll();
       });
     }

@@ -4,6 +4,10 @@
   margin: 50px auto 0 auto;
   text-align: center;
 
+  .canvas-container {
+    margin: 0 auto;
+  }
+
   #drawing-board {
     border: 1px dashed #CCC;
   }
@@ -29,12 +33,12 @@
   }
 
   &.size {
-    top: 755px;
+    top: 645px;
     width: 200px;
   }
 
   &.figure {
-    top: 275px;
+    top: 190px;
     width: 150px;
 
     button {
@@ -43,7 +47,7 @@
   }
 
   &.text {
-    top: 600px;
+    top: 505px;
     width: 200px;
 
     #add-text {
@@ -56,8 +60,12 @@
     top: 50px;
   }
 
-  &.custom {
+  &.canvas-customize {
     top: 50px;
+  }
+
+  &.custom {
+    top: 274px;
 
     .custom-item {
       border-bottom: 2px solid #f3f3f3;
@@ -87,4 +95,8 @@
   cursor: move;
   width: 24px;
   height: 24px;
+}
+
+.color-picker {
+  z-index: 10;
 }

@@ -71,6 +71,30 @@
         </div>
       </div>
     </div>
+    <div class="card right canvas-customize" *ngIf="!selected" cdkDrag>
+      <div class="drag-handle" cdkDragHandle>
+        <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+          <path d="M0 0h24v24H0z" fill="none"></path>
+        </svg>
+      </div>
+      <div class="card-header">Canvas</div>
+      <div class="card-body">
+        <div class="custom-item" *ngIf="!configProps.canvasImage">
+          <div class="custom-item-title">Background Color</div>
+          <div class="custom-item-body">
+            <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="configProps.canvasFill" [style.background]="configProps.canvasFill"
+                   [value]="configProps.canvasFill" (colorPickerChange)="setCanvasFill()">
+          </div>
+        </div>
+        <div class="custom-item">
+          <div class="custom-item-title">Background Image (url)</div>
+          <div class="custom-item-body">
+            <input type="text" class="form-control" placeholder="http://example.jpg" [(ngModel)]="configProps.canvasImage" (keyup)="setCanvasBgrImage()">
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="card right custom" cdkDrag>
       <div class="drag-handle" cdkDragHandle>
         <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
