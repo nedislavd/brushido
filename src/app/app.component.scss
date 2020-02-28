@@ -1,0 +1,12 @@
+
+
+.draw-space {
+  width: 100%;
+  max-width: 1280px;
+  margin: 25px auto 0 auto;
+  text-align: center;
+
+  #drawing-board {
+    border: 1px dashed #CCC;
+  }
+}
