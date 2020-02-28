@@ -227,6 +227,42 @@ export class AppComponent implements OnInit {
   }
 
   /*
+  * UPLOAD IMAGE
+  * */
+  addImageOnCanvas(url) {
+    if (url) {
+      fabric.Image.fromURL(url, (image) => {
+        image.set({
+          left: 10,
+          top: 10,
+          angle: 0,
+          padding: 10,
+          hasRotatingPoint: true
+        });
+        image.scaleToWidth(200);
+        image.scaleToHeight(200);
+        this.extend(image, this.randomId());
+        this.canvas.add(image);
+        this.selectItemAfterAdded(image);
+      });
+    }
+  }
+
+  readUrl(event) {
+    if (event.target.files && event.target.files[0]) {
+      let reader = new FileReader();
+      reader.onload = (event) => {
+        this.url = event.target.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
+  removeWhite(url) {
+    this.url = '';
+  };
+
+  /*
   * GLOBAL ACTIONS
   * */
   getActiveStyle(styleName, object) {

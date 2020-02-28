@@ -115,6 +115,27 @@
         </div>
       </div>
     </div>
+    <div class="card right upload-image" cdkDrag>
+      <div class="drag-handle" cdkDragHandle>
+        <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+          <path d="M0 0h24v24H0z" fill="none"></path>
+        </svg>
+      </div>
+      <div class="card-header">Upload Image</div>
+      <div class="card-body text-center">
+        <img id="testImage" *ngIf="url" class="images-item-upload" [src]="url" (click)="addImageOnCanvas(url);">
+        <input type="file" (change)="readUrl($event);">
+        <br/>
+        <br/>
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-danger btn-sm" (click)="removeWhite(url);">
+              <i class="fa fa-times" aria-hidden="true"></i> Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="card right custom" cdkDrag>
       <div class="drag-handle" cdkDragHandle>
         <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
