@@ -1,3 +1,40 @@
-<section class="draw-space">
-  <canvas id="drawing-board" width="{{configProps.width}}" height="{{configProps.height}}"></canvas>
-</section>
+
+<div class="container brushido-wrapper">
+  <div class="row">
+    <div class="card size-card" cdkDrag>
+      <div class="drag-handle">
+        <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+          <path d="M0 0h24v24H0z" fill="none"></path>
+        </svg>
+      </div>
+      <div class="card-header">Size</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="configProps.width" (keyup)="adjustCanvasSize(configProps.width)">
+            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    Width
+                                </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" [(ngModel)]="configProps.height" (keyup)="adjustCanvasSize(configProps.height)">
+            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    Height
+                                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="draw-space">
+      <canvas id="drawing-board" width="1280" height="1024"></canvas>
+    </section>
+
+  </div>
+</div>

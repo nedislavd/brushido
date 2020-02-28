@@ -3,4 +3,5 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+@import '~bootstrap/dist/css/bootstrap.min.css';
 @import "app/app.component";

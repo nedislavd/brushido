@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { fabric } from 'fabric';
 
 @Component({
@@ -7,10 +8,10 @@ import { fabric } from 'fabric';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  private canvas: any;
+  canvas: any;
 
-  private configProps: any = {
-    width: 1280,
+  configProps: any = {
+    width: 1024,
     height: 1024,
     canvasFill: '#FFFFFF',
     canvasImage: '',
@@ -27,14 +28,14 @@ export class AppComponent implements OnInit {
     TextDecoration: ''
   };
 
-  private textString: string;
-  private url: string = '';
+  textString: string;
+  url: any = '';
 
-  private json: any;
-  private textEditor: boolean = false;
-  private imageEditor: boolean = false;
-  private figureEditor: boolean = false;
-  private selected: any;
+  json: any;
+  textEditor = false;
+  imageEditor = false;
+  figureEditor = false;
+  selected: any;
 
   constructor() { }
 
@@ -52,5 +53,56 @@ export class AppComponent implements OnInit {
 
     // this.canvas.add(new fabric.IText('Brushido Painter'));
 
+  }
+
+  // Add Figure
+
+  // Change canvas size
+  adjustCanvasSize(event: any) {
+    this.canvas.setDimensions({
+      width: this.configProps.width,
+      height: this.configProps.height,
+    });
+  }
+
+  // Canvas Utility Methods
+  cleanSelect() {
+    this.canvas.deactivateAllWithDispatch().renderAll();
+  }
+
+  selectItemAfterAdded(obj) {
+    this.canvas.deactivateAllWithDispatch().renderAll();
+    this.canvas.setActiveObject(obj);
+  }
+
+  setCanvasFill() {
+    if (!this.configProps.canvasImage) {
+      this.canvas.backgroundColor = this.configProps.canvasFill;
+      this.canvas.renderAll();
+    }
+  }
+
+  extend(obj, id) {
+    obj.toObject = ((toObject) => {
+      return function () {
+        return fabric.util.object.extend(toObject.call(this), {
+          id: id
+        });
+      };
+    })(obj.toObject);
+  }
+
+  setCanvasBgrImage() {
+    let self = this;
+    if (this.configProps.canvasImage) {
+      this.canvas.setBackgroundColor({ source: this.configProps.canvasImage, repeat: 'repeat' }, function () {
+        // self.configProps.canvasFill = '';
+        self.canvas.renderAll();
+      });
+    }
+  }
+
+  randomId() {
+    return Math.floor(Math.random() * 999999) + 1;
   }
 }
