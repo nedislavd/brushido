@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { fabric } from 'fabric';
 
 @Component({
@@ -46,13 +45,18 @@ export class AppComponent implements OnInit {
       selectionBorderColor: 'green'
     });
 
+    this.canvas.on('selection:updated', (e) => {
+      console.log(e.target);
+    });
+
     this.canvas.on({
       'object:moving': (e) => { },
       'object:modified': (e) => { },
-      'object:selected': (e) => {
+      'selection:created': (e) => {
 
-        const selectedObject = e.target;
+        let selectedObject = e.target;
         this.selected = selectedObject;
+        console.log(e.target);
         selectedObject.hasRotatingPoint = true;
         selectedObject.transparentCorners = false;
 
@@ -134,6 +138,26 @@ export class AppComponent implements OnInit {
     this.selectItemAfterAdded(add);
   }
 
+  // Text Node
+  addText() {
+    let textString = this.textString;
+    let text = new fabric.IText(textString, {
+      left: 10,
+      top: 10,
+      fontFamily: 'helvetica',
+      angle: 0,
+      fill: '#000000',
+      scaleX: 0.5,
+      scaleY: 0.5,
+      fontWeight: '',
+      hasRotatingPoint: true
+    });
+    this.extend(text, this.randomId());
+    this.canvas.add(text);
+    this.selectItemAfterAdded(text);
+    this.textString = '';
+  }
+
   /*
   * Canvas Utility Methods
   * */
@@ -145,11 +169,11 @@ export class AppComponent implements OnInit {
   }
 
   cleanSelect() {
-    this.canvas.deactivateAllWithDispatch().renderAll();
+    this.canvas.discardActiveObject().renderAll();
   }
 
   selectItemAfterAdded(obj) {
-    this.canvas.deactivateAllWithDispatch().renderAll();
+    this.canvas.discardActiveObject().renderAll();
     this.canvas.setActiveObject(obj);
   }
 

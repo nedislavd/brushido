@@ -12,7 +12,14 @@
 .card {
   z-index: 5;
   position: absolute;
-  left: 25px;
+
+  &.left {
+    left: 25px;
+  }
+  
+  &.right {
+    right: 25px;
+  }
 
 
   &:active {
@@ -33,6 +40,20 @@
     button {
       margin-bottom: 5px;
     }
+  }
+
+  &.text {
+    top: 560px;
+    width: 200px;
+
+    #add-text {
+      height: 24px;
+      padding-top: 0;
+    }
+  }
+  
+  &.custom {
+    top: 50px;
   }
 }
 
