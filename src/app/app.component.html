@@ -136,6 +136,50 @@
         </div>
       </div>
     </div>
+    <div class="card right img-template-toggle" cdkDrag>
+      <div class="card-header">Insert template</div>
+      <div class="drag-handle" cdkDragHandle>
+        <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+          <path d="M0 0h24v24H0z" fill="none"></path>
+        </svg>
+      </div>
+      <div class="card-body max-height">
+        <button type="button" class="btn btn-primary" title="See Memes..." (click)="showMemeLibrary()">Show Image Library</button>
+      </div>
+    </div>
+    <div *ngIf="showTemplateLib" class="card right image-templates" cdkDrag>
+      <div class="card-header">Add memes</div>
+      <div class="drag-handle" cdkDragHandle>
+        <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+          <path d="M0 0h24v24H0z" fill="none"></path>
+        </svg>
+        <button type="button" title="Close" (click)="showMemeLibrary()">
+          <i class="fa fa-window-close"></i>
+        </button>
+      </div>
+      <div class="card-body max-height">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/any_more_of_that.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/batman_slap.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/big_brain.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/blank_button.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/change_my_mind.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/drake.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/finding_neverland.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/is_this_a_pigeon.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/not_sure_if.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/one_does_not_simply.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/right_exit.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/seagull.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/skeptical_kid.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/think_about_it.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/trump_bill_signing.jpg">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/tuxedo_winnie.png">
+        <img class="images-item" (click)="loadImageFromFile($event)" src="assets/img/templates/wtf_tom.jpg">
+      </div>
+    </div>
+
     <div class="card right custom" cdkDrag>
       <div class="drag-handle" cdkDragHandle>
         <svg width="24px" fill="currentColor" viewBox="0 0 24 24">

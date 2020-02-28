@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
   imageEditor = false;
   figureEditor = false;
   selected: any;
+  showTemplateLib = false;
 
   constructor() { }
 
@@ -226,6 +227,10 @@ export class AppComponent implements OnInit {
     return Math.floor(Math.random() * 999999) + 1;
   }
 
+  showMemeLibrary() {
+    this.showTemplateLib = !this.showTemplateLib;
+  }
+
   /*
   * UPLOAD IMAGE
   * */
@@ -261,6 +266,26 @@ export class AppComponent implements OnInit {
   removeWhite(url) {
     this.url = '';
   };
+
+  /*
+  * INSERT IMAGE FROM TEMPLATE
+  * */
+  loadImageFromFile(event: any) {
+    fabric.Image.fromURL(event.target.src, (image) => {
+      image.set({
+        left: 10,
+        top: 10,
+        angle: 0,
+        padding: 10,
+        hasRotatingPoint: true,
+      });
+      image.scaleToWidth(250);
+      image.scaleToHeight(250);
+      this.extend(image, this.randomId());
+      this.canvas.add(image);
+      this.selectItemAfterAdded(image);
+    });
+  }
 
   /*
   * GLOBAL ACTIONS
