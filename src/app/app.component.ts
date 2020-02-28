@@ -7,22 +7,50 @@ import { fabric } from 'fabric';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  canvas: any;
+  private canvas: any;
 
-  configProps = {
+  private configProps: any = {
     width: 1280,
     height: 1024,
+    canvasFill: '#FFFFFF',
+    canvasImage: '',
+    id: null,
+    opacity: null,
+    fill: null,
+    fontSize: null,
+    lineHeight: null,
+    charSpacing: null,
+    fontWeight: null,
+    fontStyle: null,
+    textAlign: null,
+    fontFamily: null,
+    TextDecoration: ''
   };
+
+  private textString: string;
+  private url: string = '';
+
+  private json: any;
+  private textEditor: boolean = false;
+  private imageEditor: boolean = false;
+  private figureEditor: boolean = false;
+  private selected: any;
+
+  constructor() { }
 
   ngOnInit() {
     this.canvas = new fabric.Canvas('drawing-board', {
       isDrawingMode: true,
-      selection: true
+      selection: true,
+      selectionBorderColor: 'green'
     });
+
     this.canvas.setDimensions({
       width: this.configProps.width,
       height: this.configProps.height,
     });
-    this.canvas.add(new fabric.IText('Brushido Painter'));
+
+    // this.canvas.add(new fabric.IText('Brushido Painter'));
+
   }
 }
