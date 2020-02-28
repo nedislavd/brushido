@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
 
   configProps: any = {
     width: 800,
-    height: 1024,
+    height: 800,
     canvasFill: '#FFFFFF',
     canvasImage: '',
     id: null,
@@ -52,6 +52,7 @@ export class AppComponent implements OnInit {
     this.canvas.on({
       'selection:cleared': (e) => {
         this.selected = null;
+        this.resetPanels();
       },
       'selection:created': (e) => {
 
@@ -92,10 +93,6 @@ export class AppComponent implements OnInit {
               break;
           }
         }
-      },
-      'selection:cleared': (e) => {
-        this.selected = null;
-        this.resetPanels();
       }
     });
 
@@ -201,9 +198,20 @@ export class AppComponent implements OnInit {
   setCanvasBgrImage() {
     let self = this;
     if (this.configProps.canvasImage) {
-      this.canvas.setBackgroundColor({ source: this.configProps.canvasImage, repeat: 'repeat' }, () => {
-        self.configProps.canvasFill = '';
-        self.canvas.renderAll();
+      fabric.Image.fromURL(this.configProps.canvasImage, (imgObj) => {
+        self.canvas.setBackgroundImage(imgObj, () => {
+          self.configProps.canvasFill = '';
+          imgObj.scaleToWidth(self.canvas.width);
+          imgObj.scaleToHeight(self.canvas.height);
+          self.canvas.backgroundImage.strech = true;
+          self.canvas.renderAll();
+        }, {
+          opacity: 1,
+          repeat: true
+        });
+
+      }, {
+        crossOrigin: 'Anonymous'
       });
     } else {
       self.canvas.setBackgroundColor('#FFFFFF', () => {
@@ -429,19 +437,36 @@ export class AppComponent implements OnInit {
   confirmClear() {
     if (confirm('Are you sure?')) {
       this.canvas.clear();
+      this.configProps = {
+        width: 800,
+        height: 800,
+        canvasFill: '#FFFFFF',
+        canvasImage: '',
+        id: null,
+        opacity: null,
+        fill: null,
+        fontSize: null,
+        lineHeight: null,
+        charSpacing: null,
+        fontWeight: null,
+        fontStyle: null,
+        textAlign: null,
+        fontFamily: null,
+        TextDecoration: ''
+      }
     }
   }
 
   rasterize() {
-    if (!fabric.Canvas.supports('toDataURL')) {
-      alert('This browser doesn\'t provide means to serialize canvas to an image');
-    } else {
+    // if (!fabric.Canvas.supports('toDataURL')) {
+    //   alert('This browser doesn\'t provide means to serialize canvas to an image');
+    // } else {
       console.log(this.canvas.toDataURL('png'));
       let image = new Image();
       image.src = this.canvas.toDataURL('png');
       let w = window.open('');
       w.document.write(image.outerHTML);
-    }
+    // }
   }
 
   rasterizeSVG() {

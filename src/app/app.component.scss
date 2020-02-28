@@ -13,6 +13,20 @@
   }
 }
 
+.save-clear {
+  position: absolute;
+  top: 5px;
+  right: 25px;
+
+  button {
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
 .card {
   z-index: 5;
   position: absolute;
