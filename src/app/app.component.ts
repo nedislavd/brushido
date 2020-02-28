@@ -50,11 +50,9 @@ export class AppComponent implements OnInit {
     });
 
     this.canvas.on({
-      'object:moving': (e) => { },
-      'object:modified': (e) => { },
       'selection:created': (e) => {
 
-        let selectedObject = e.target;
+        const selectedObject = e.target;
         this.selected = selectedObject;
         console.log(e.target);
         selectedObject.hasRotatingPoint = true;
@@ -71,6 +69,7 @@ export class AppComponent implements OnInit {
             case 'rect':
             case 'circle':
             case 'triangle':
+            case 'ellipse':
               this.figureEditor = true;
               this.getFill();
               break;
@@ -101,9 +100,6 @@ export class AppComponent implements OnInit {
       width: this.configProps.width,
       height: this.configProps.height,
     });
-
-    // this.canvas.add(new fabric.IText('Brushido Painter'));
-
   }
 
   // Add Figure
@@ -132,6 +128,11 @@ export class AppComponent implements OnInit {
           radius: 50, left: 10, top: 10, fill: '#ff5722'
         });
         break;
+      case 'ellipse':
+        add = new fabric.Ellipse({
+          rx: 120, ry: 80, left: 10, top: 10, fill: '#fd0909'
+        });
+        break;
     }
     this.extend(add, this.randomId());
     this.canvas.add(add);
@@ -140,8 +141,8 @@ export class AppComponent implements OnInit {
 
   // Text Node
   addText() {
-    let textString = this.textString;
-    let text = new fabric.IText(textString, {
+    const textString = this.textString;
+    const text = new fabric.IText(textString, {
       left: 10,
       top: 10,
       fontFamily: 'helvetica',
@@ -254,26 +255,27 @@ export class AppComponent implements OnInit {
   }
 
   clone() {
-    let activeObject = this.canvas.getActiveObject(),
-        activeGroup = this.canvas.getActiveGroup();
 
-    if (activeObject) {
+    this.canvas.getActiveObjects().forEach((object) => {
       let clone;
-      switch (activeObject.type) {
+      switch (object.type) {
         case 'rect':
-          clone = new fabric.Rect(activeObject.toObject());
+          clone = new fabric.Rect(object.toObject());
           break;
         case 'circle':
-          clone = new fabric.Circle(activeObject.toObject());
+          clone = new fabric.Circle(object.toObject());
           break;
         case 'triangle':
-          clone = new fabric.Triangle(activeObject.toObject());
+          clone = new fabric.Triangle(object.toObject());
+          break;
+        case 'ellipse':
+          clone = new fabric.Ellipse(object.toObject());
           break;
         case 'i-text':
-          clone = new fabric.IText('', activeObject.toObject());
+          clone = new fabric.IText('', object.toObject());
           break;
         case 'image':
-          clone = fabric.util.object.clone(activeObject);
+          clone = fabric.util.object.clone(object);
           break;
       }
       if (clone) {
@@ -281,7 +283,7 @@ export class AppComponent implements OnInit {
         this.canvas.add(clone);
         this.selectItemAfterAdded(clone);
       }
-    }
+    });
   }
 
   getId() {
@@ -364,9 +366,9 @@ export class AppComponent implements OnInit {
   setTextDecoration(value) {
     let iclass = this.configProps.TextDecoration;
     if (iclass.includes(value)) {
-      iclass = iclass.replace(RegExp(value, "g"), "");
+      iclass = iclass.replace(RegExp(value, 'g'), '');
     } else {
-      iclass += ` ${value}`
+      iclass += ` ${value}`;
     }
     this.configProps.TextDecoration = iclass;
     this.setActiveStyle('textDecoration', this.configProps.TextDecoration, null);
@@ -398,51 +400,21 @@ export class AppComponent implements OnInit {
   * SYSTEM METHODS
   * */
   removeSelected() {
-    let activeObject = this.canvas.getActiveObject(),
-      activeGroup = this.canvas.getActiveGroup();
-
-    if (activeObject) {
-      this.canvas.remove(activeObject);
-      // clean text
-      // this.textString = '';
-    } else if (activeGroup) {
-      let objectsInGroup = activeGroup.getObjects();
-      this.canvas.discardActiveGroup();
-      let self = this;
-      objectsInGroup.forEach(function (object) {
-        self.canvas.remove(object);
-      });
-    }
+    this.canvas.getActiveObjects().forEach((object) => {
+      this.canvas.remove(object);
+    });
   }
 
   bringToFront() {
-    let activeObject = this.canvas.getActiveObject(),
-        activeGroup = this.canvas.getActiveGroup();
-
-    if (activeObject) {
-      activeObject.bringToFront();
-    } else if (activeGroup) {
-      let objectsInGroup = activeGroup.getObjects();
-      this.canvas.discardActiveGroup();
-      objectsInGroup.forEach((object) => {
-        object.bringToFront();
-      });
-    }
+    this.canvas.getActiveObjects().forEach((object) => {
+      object.bringToFront();
+    });
   }
 
   sendToBack() {
-    let activeObject = this.canvas.getActiveObject(),
-      activeGroup = this.canvas.getActiveGroup();
-
-    if (activeObject) {
-      activeObject.sendToBack();
-    } else if (activeGroup) {
-      let objectsInGroup = activeGroup.getObjects();
-      this.canvas.discardActiveGroup();
-      objectsInGroup.forEach((object) => {
-        object.sendToBack();
-      });
-    }
+    this.canvas.getActiveObjects().forEach((object) => {
+      object.sendToBack();
+    });
   }
 
   confirmClear() {

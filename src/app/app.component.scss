@@ -16,7 +16,7 @@
   &.left {
     left: 25px;
   }
-  
+
   &.right {
     right: 25px;
   }
@@ -29,7 +29,7 @@
   }
 
   &.size {
-    top: 50px;
+    top: 755px;
     width: 200px;
   }
 
@@ -43,7 +43,7 @@
   }
 
   &.text {
-    top: 560px;
+    top: 600px;
     width: 200px;
 
     #add-text {
@@ -51,9 +51,26 @@
       padding-top: 0;
     }
   }
-  
+
+  &.options {
+    top: 50px;
+  }
+
   &.custom {
     top: 50px;
+
+    .custom-item {
+      border-bottom: 2px solid #f3f3f3;
+
+      .custom-item-title {
+        color: #666666;
+        font-weight: 600;
+      }
+
+      .custom-item-body {
+        padding: 10px 0;
+      }
+    }
   }
 }
 

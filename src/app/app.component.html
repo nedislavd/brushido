@@ -46,6 +46,7 @@
           <button type="button" class="btn btn-primary" (click)="addFigure('square');">Square</button>
           <button type="button" class="btn btn-primary" (click)="addFigure('triangle');">Triangle</button>
           <button type="button" class="btn btn-primary" (click)="addFigure('circle');">Circle</button>
+          <button type="button" class="btn btn-primary" (click)="addFigure('ellipse');">Ellipse</button>
         </div>
       </div>
     </div>
@@ -77,7 +78,7 @@
           <path d="M0 0h24v24H0z" fill="none"></path>
         </svg>
       </div>
-      <div class="card-header">Custom</div>
+      <div class="card-header">Customize</div>
       <div class="card-body">
         <div class="custom-item" *ngIf="selected  && selected.type == 'group'">Group Selected</div>
         <div class="custom-item" *ngIf="!selected">No items selected</div>
@@ -181,6 +182,39 @@
           <div class="custom-item-title">Char Spacing</div>
           <div class="custom-item-body">
             <input type="range" [(ngModel)]="configProps.charSpacing" (change)="setCharSpacing()" step="10" min="-200" max="800">{{configProps.charSpacing}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="card left options" cdkDrag>
+      <div class="drag-handle" cdkDragHandle>
+        <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+          <path d="M0 0h24v24H0z" fill="none"></path>
+        </svg>
+      </div>
+      <div class="card-header">Options</div>
+      <div class="card-body text-center">
+        <div class="btn-group" role="group" aria-label="...">
+          <button data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-outline-danger" [disabled]="!selected"
+                  (click)="removeSelected();">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+          <button data-toggle="tooltip" data-placement="bottom" title="Send to back" type="button" class="btn btn-outline-primary" [disabled]="!selected"
+                  (click)="sendToBack();">
+            <i class="fa fa-level-down" aria-hidden="true"></i>
+          </button>
+          <button data-toggle="tooltip" data-placement="bottom" title="Send to front" type="button" class="btn btn-outline-primary" [disabled]="!selected"
+                  (click)="bringToFront();">
+            <i class="fa fa-level-up" aria-hidden="true"></i>
+          </button>
+          <button data-toggle="tooltip" data-placement="bottom" title="Clone" type="button" class="btn btn-outline-primary" [disabled]="!selected || selected.type == 'group'"
+                  (click)="clone();">
+            <i class="fa fa-clone" aria-hidden="true"></i>
+          </button>
+          <button data-toggle="tooltip" data-placement="bottom" title="Unselect" type="button" class="btn btn-outline-primary" [disabled]="!selected"
+                  (click)="cleanSelect()">
+            <i class="fa fa-remove" aria-hidden="true"></i>
+          </button>
         </div>
       </div>
     </div>
