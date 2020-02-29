@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
     width: 800,
     height: 800,
     canvasFill: '#FFFFFF',
+    brushColor: '#000000',
+    brushStrokeSize: 20,
     canvasImage: '',
     id: null,
     opacity: null,
@@ -36,14 +38,15 @@ export class AppComponent implements OnInit {
   figureEditor = false;
   selected: any;
   showTemplateLib = false;
+  drawingMode = true;
 
   constructor() { }
 
   ngOnInit() {
     this.canvas = new fabric.Canvas('drawing-board', {
-      isDrawingMode: false,
+      isDrawingMode: this.drawingMode,
       selection: true,
-      selectionBorderColor: 'green'
+      selectionBorderColor: 'purple'
     });
 
     this.canvas.on('selection:updated', (e) => {
@@ -101,6 +104,35 @@ export class AppComponent implements OnInit {
       width: this.configProps.width,
       height: this.configProps.height,
     });
+  }
+
+  // configure free drawing mode or pencil/spray
+  freeDrawing(mode) {
+
+
+    console.log(this.canvas.isDrawingMode);
+    if (mode == 'select') {
+      this.drawingMode = false;
+      this.canvas.isdrawingMode = this.drawingMode;
+      console.log('IN SELECT MODE');
+    } else {
+      this.drawingMode = true;
+      this.canvas.isdrawingMode = this.drawingMode;
+
+      this.configProps.brushColor = '#000000';
+      this.configProps.brushStrokeSize = 20;
+      this.canvas.freeDrawingBrush = new fabric[mode + 'Brush'](this.canvas);
+    }
+
+    // this.canvas.isdrawingMode = this.drawingMode;
+  }
+
+  setBrushSize() {
+    this.canvas.freeDrawingBrush.width = parseInt(this.configProps.brushStrokeSize, 10) || 1;
+  }
+
+  setBrushColor() {
+    this.canvas.freeDrawingBrush.color = this.configProps.brushColor;
   }
 
   // Add Figure
@@ -502,6 +534,8 @@ export class AppComponent implements OnInit {
         width: 800,
         height: 800,
         canvasFill: '#FFFFFF',
+        brushColor: '#000000',
+        brushStrokeSize: 20,
         canvasImage: '',
         id: null,
         opacity: null,

@@ -8,11 +8,11 @@ Course Work Project for my Computer Graphics class @FMI Plovdiv University
  - [X] Manipulation of graphic primitives - for example moving, rotating, scaling, etc.
  - [X] Creating an image structure by grouping different elements (select multiple / group)
  - [X] Manipulation of groups - moving, rotating, scaling, etc
- - Different ways of defining the characteristics of objects in an image - for example, assigning a color by its name, naming the objects in the image, etc.
+ - [ ] Different ways of defining the characteristics of objects in an image - for example, assigning a color by its name, naming the objects in the image, etc.
  - [X] Various ways of setting user operations - for example, through menus, buttons, mouse, etc.
  - [X] Support for a wide range of image editing operations such as adding items, removing items, copying, updating features, hierarchical grouping, grouping and etc.
- - Different options for selecting object(s) from the image
- - Using multi-window  technique to support multiple views of the same image, and to work with multiple images at the same time
+ - [ ] Different options for selecting object(s) from the image
+ - [ ] Using multi-window  technique to support multiple views of the same image, and to work with multiple images at the same time
  - [X] Different options for reading / writing the image model from / to external media.
  
  Personal TODO:
