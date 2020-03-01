@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { fabric } from 'fabric';
 
+/**
+ * TODO: add new figure primitive
+ *
+ * */
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -38,7 +43,7 @@ export class AppComponent implements OnInit {
   figureEditor = false;
   selected: any;
   showTemplateLib = false;
-  drawingMode = true;
+  drawingMode = false;
 
   constructor() { }
 
@@ -113,11 +118,11 @@ export class AppComponent implements OnInit {
     console.log(this.canvas.isDrawingMode);
     if (mode == 'select') {
       this.drawingMode = false;
-      this.canvas.isdrawingMode = this.drawingMode;
+      this.canvas.isdrawingMode = false;
       console.log('IN SELECT MODE');
     } else {
       this.drawingMode = true;
-      this.canvas.isdrawingMode = this.drawingMode;
+      this.canvas.isdrawingMode = true;
 
       this.configProps.brushColor = '#000000';
       this.configProps.brushStrokeSize = 20;
@@ -165,6 +170,23 @@ export class AppComponent implements OnInit {
         add = new fabric.Ellipse({
           rx: 120, ry: 80, left: 10, top: 10, fill: '#fd0909'
         });
+        break;
+      case 'weird':
+        fabric.Image.fromURL('assets/img/weird_figure.svg', (image) => {
+          image.set({
+            left: 10,
+            top: 10,
+            angle: 0,
+            padding: 10,
+            hasRotatingPoint: true,
+          });
+          image.scaleToWidth(250);
+          image.scaleToHeight(250);
+          this.extend(image, this.randomId());
+          this.canvas.add(image);
+          this.selectItemAfterAdded(image);
+        });
+
         break;
     }
     this.extend(add, this.randomId());
