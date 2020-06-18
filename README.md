@@ -1,5 +1,5 @@
 # BrushidoApp
-Course Work Project for my Computer Graphics class @FMI Plovdiv University
+Course Work Project for my Computer Graphics class @FMI Plovdiv University, written in 24 hours.
 
 ## Course Work Tasks
  - [X] Create an image using different vector primitives - dots, lines, polygons, ellipses, etc.
@@ -16,8 +16,8 @@ Course Work Project for my Computer Graphics class @FMI Plovdiv University
  - [X] Different options for reading / writing the image model from / to external media.
  
  Personal TODO:
- - Add Brush Work / Airbrush
- - Add Brush Stroke
+ - [X] Add Brush Work / Airbrush
+ - [X] Add Brush Stroke
  - Add Key Combos
  - Add Undo/Redo
 
