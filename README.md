@@ -1,5 +1,5 @@
 # BrushidoApp
-Course Work Project for my Computer Graphics class @FMI Plovdiv University, written in 24 hours.
+Course Work Project for my Computer Graphics class @FMI Plovdiv University, written in a day.
 
 ## Course Work Tasks
  - [X] Create an image using different vector primitives - dots, lines, polygons, ellipses, etc.
